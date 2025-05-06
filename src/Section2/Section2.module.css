@@ -1,0 +1,256 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities; 
+
+
+.container {
+  margin-left: 300px;
+  margin-top: -500px;
+
+  justify-content: center;
+  padding: 2rem;
+  background: #ffff;
+  min-height: 100vh;
+}
+
+.form {
+  width: 100%;
+  max-width: 350px;
+  background: white;
+  border-radius: 16px;
+  padding: 2.5rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+}
+
+.title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.titleIcon {
+  background: #3b82f6;
+  color: white;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+.label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.selectWrapper {
+  position: relative;
+}
+
+.select {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 1rem;
+  appearance: none;
+  background-color: white;
+  transition: border-color 0.2s;
+}
+
+.select:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+.selectArrow {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #94a3b8;
+  pointer-events: none;
+}
+
+.itemsSection {
+  margin: 2rem 0;
+  padding-top: 1.5rem;
+  border-top: 1px solid #f1f5f9;
+}
+
+.sectionTitle {
+  font-size: 1.25rem;
+  color: #1e293b;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sectionIcon {
+  font-size: 1.1em;
+}
+
+.itemCard {
+  background: #f8fafc;
+  border-radius: 12px;
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+  position: relative;
+  transition: transform 0.2s;
+}
+
+.itemCard:hover {
+  transform: translateY(-2px);
+}
+
+.itemControls {
+  display: grid;
+  grid-template-columns: 1fr 120px;
+  gap: 1.5rem;
+}
+
+.quantityInput {
+  display: flex;
+  align-items: center;
+  background: white;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  overflow: hidden;
+}
+
+.quantityBtn {
+  background: #f1f5f9;
+  border: none;
+  width: 36px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  color: #475569;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.quantityBtn:hover {
+  background: #e2e8f0;
+}
+
+.quantityValue {
+  width: 48px;
+  text-align: center;
+  border: none;
+  padding: 0.75rem 0;
+  font-size: 1rem;
+  appearance: textfield;
+}
+
+.quantityValue:focus {
+  outline: none;
+}
+
+.removeItemBtn {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: #fee2e2;
+  border: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #dc2626;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.removeItemBtn:hover {
+  background: #fecaca;
+  transform: scale(1.1);
+}
+
+.removeIcon {
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.addItemBtn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: none;
+  border: 2px dashed #cbd5e1;
+  color: #64748b;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-top: 0.5rem;
+  width: 100%;
+  justify-content: center;
+}
+
+.addItemBtn:hover {
+  border-color: #94a3b8;
+  color: #475569;
+  background: #f8fafc;
+}
+
+.plusIcon {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.submitBtn {
+  width: 100%;
+  background: #3b82f6;
+  color: white;
+  border: none;
+  padding: 1rem;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: background 0.2s;
+}
+
+.submitBtn:hover {
+  background: #2563eb;
+}
+
+.submitArrow {
+  font-size: 1.2rem;
+  transition: transform 0.2s;
+}
+
+.submitBtn:hover .submitArrow {
+  transform: translateX(3px);
+}
+
+.inputDescription{
+  margin-top: 0.8rem;
+  width: 96%;
+  height: 40px;
+  font-size: 13px;
+  padding: 6px 0 4px 10px;
+  border: 1px solid #cecece;
+  border-radius: 8px;
+}

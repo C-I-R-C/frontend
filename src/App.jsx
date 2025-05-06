@@ -5,7 +5,8 @@ import Button from './Button/Button';
 
 import {Fragment, useState} from 'react'
 import TabSection from './TabSection/TabSection';
-import Section2 from './Section2/Section2';
+import AddClient from './Section2/AddClient';
+import ClientsTable from './Section2/ClientsTable';
 
 
 export default function App() {
@@ -13,7 +14,7 @@ export default function App() {
 
   return (
    
-    <Fragment>
+    <Fragment  className="relative" >
 
       <h3>
       <HeadName></HeadName>    
@@ -32,7 +33,12 @@ export default function App() {
 
      {tab === 'section2' &&
     (
-      <Section2></Section2>
+      <>
+      <AddClient ></AddClient>
+      <ClientsTable></ClientsTable>
+
+      </>
+      
      )
      }
   

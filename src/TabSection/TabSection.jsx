@@ -1,5 +1,5 @@
 import Button from '../Button/Button'
-
+import style from './text.module.css'
 
 export default function TabSection({active, onChange}){
     return (
@@ -13,11 +13,17 @@ export default function TabSection({active, onChange}){
         </section>
 
         <section>
-            <Button isActive = {active === 'section3'} onClick = {() => onChange('section3')}>Ингредиенты</Button>
+            <Button isActive = {active === 'section3'} onClick = {() => onChange('section3')}>Клиенты</Button>
+        </section>
+        
+        <p className={style.text}>Инветаризация:</p>
+
+        <section>
+            <Button isActive = {active === 'section4'} onClick = {() => onChange('section4')} >Ингредиенты</Button>
         </section>
 
         <section>
-            <Button isActive = {active === 'section4'} onClick = {() => onChange('section4')} >Корбки</Button>
+            <Button isActive = {active === 'section5'} onClick = {() => onChange('section5')} >Корбки</Button>
         </section>
         
         </>
