@@ -16,18 +16,16 @@ export default function TabSection({active, onChange}){
             <Button isActive = {active === 'section3'} onClick = {() => onChange('section3')}>Клиенты</Button>
         </section>
         
-        <p className={style.text}>Инветаризация:</p>
+        <p className={style.text}>Инвентаризация:</p>
 
         <section>
             <Button isActive = {active === 'section4'} onClick = {() => onChange('section4')} >Ингредиенты</Button>
         </section>
 
         <section>
-            <Button isActive = {active === 'section5'} onClick = {() => onChange('section5')} >Корбки</Button>
+            <Button isActive = {active === 'section5'} onClick = {() => onChange('section5')} >Коробки</Button>
         </section>
         
         </>
-        
-
     )
 }
