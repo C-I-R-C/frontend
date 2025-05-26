@@ -1,0 +1,30 @@
+.container {
+    display: flex;
+    justify-content: center;
+    padding-top: 50px;
+    min-height: 100vh;
+}
+
+.buttonsRow {
+    display: flex;
+    gap: 20px;
+}
+
+.link {
+    text-decoration: none;
+}
+
+.button_ {
+    width: 300px;
+    height: 80px;
+    background-color: rgb(225, 142, 156);
+    font-size: 30px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button_:hover {
+    background-color: rgb(231, 182, 190);
+}
