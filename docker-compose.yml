@@ -1,0 +1,10 @@
+services:
+  crm:
+    image: crm
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    environment:
+      NODE_ENV: development
+    ports:
+      - 5173:5173

@@ -23,7 +23,7 @@ function AddItem() {
   const fetchBoxes = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('https://localhost:5001/api/Boxes');
+      const response = await axios.get('https://localhost:1984/api/Boxes');
       setBoxes(response.data);
     } catch (err) {
       setError(err.message);
@@ -38,7 +38,7 @@ function AddItem() {
       setLoading(true);
       setError(null);
       
-      await axios.post('https://localhost:5001/api/Items', {
+      await axios.post('https://localhost:1984/api/Items', {
         name: newItem.name,
         basePrice: parseFloat(newItem.basePrice),
         boxId: parseInt(newItem.boxId)

@@ -13,13 +13,13 @@ function ProfitChart2() {
         setLoading(true);
         
         // 1. Get all orders
-        const ordersResponse = await axios.get('https://localhost:5001/api/Orders');
+        const ordersResponse = await axios.get('https://localhost:1984/api/Orders');
         const orders = ordersResponse.data;
 
         // 2. Get profit data for each order
         const profits = await Promise.all(
           orders.map(order => 
-            axios.get(`https://localhost:5001/api/Orders/${order.id}/profit`)
+            axios.get(`https://localhost:1984/api/Orders/${order.id}/profit`)
               .then(res => res.data)
               .catch(() => null) // Ignore errors for individual orders
           )

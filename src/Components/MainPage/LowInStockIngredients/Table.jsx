@@ -21,7 +21,7 @@ const LowStockIngredients = () => {
   useEffect(() => {
     const fetchLowStockIngredients = async () => {
       try {
-        const response = await axios.get('https://localhost:5001/api/Ingredients/low-stock?count=5');
+        const response = await axios.get('https://localhost:1984/api/Ingredients/low-stock?count=5');
         setIngredients(response.data);
       } catch (err) {
         setError(err.message);

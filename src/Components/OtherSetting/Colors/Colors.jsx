@@ -22,7 +22,7 @@ function ColorsTable() {
 
   const fetchColors = async () => {
     try {
-      const response = await axios.get('https://localhost:5001/api/Colors');
+      const response = await axios.get('https://localhost:1984/api/Colors');
       setColors(response.data);
       setFilteredColors(response.data);
     } catch (err) {
@@ -34,7 +34,7 @@ function ColorsTable() {
 
   const handleAddColor = async () => {
     try {
-      await axios.post('https://localhost:5001/api/Colors', newColor);
+      await axios.post('https://localhost:1984/api/Colors', newColor);
       setShowAddModal(false);
       setNewColor({ name: '', isNatural: true });
       await fetchColors();
@@ -45,7 +45,7 @@ function ColorsTable() {
 
   const handleEditColor = async () => {
     try {
-      await axios.put(`https://localhost:5001/api/Colors/${currentColor.id}`, {
+      await axios.put(`https://localhost:1984/api/Colors/${currentColor.id}`, {
         id: currentColor.id,
         name: currentColor.name,
         isNatural: currentColor.isNatural
@@ -59,7 +59,7 @@ function ColorsTable() {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`https://localhost:5001/api/Colors/${id}`);
+      await axios.delete(`https://localhost:1984/api/Colors/${id}`);
       await fetchColors();
     } catch (err) {
       setError(err.message);

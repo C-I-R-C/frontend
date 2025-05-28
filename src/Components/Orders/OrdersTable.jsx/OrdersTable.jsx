@@ -32,7 +32,7 @@ function OrdersTable() {
     const fetchOrders = async () => {
         try {
             setLoading(true);
-            const response = await axios.get('https://localhost:5001/api/Orders');
+            const response = await axios.get('https://localhost:1984/api/Orders');
             setOrders(response.data);
         } catch (err) {
             toast.error(`Ошибка загрузки заказов: ${err.message}`);
@@ -94,7 +94,7 @@ function OrdersTable() {
 
     const handleEditOrder = async () => {
         try {
-            await axios.put(`https://localhost:5001/api/Orders/${currentOrder.id}`, orderData);
+            await axios.put(`https://localhost:1984/api/Orders/${currentOrder.id}`, orderData);
             toast.success('Заказ успешно обновлен');
             setShowEditModal(false);
             await fetchOrders();
@@ -105,7 +105,7 @@ function OrdersTable() {
 
     const completeOrder = async (orderId) => {
         try {
-            await axios.patch(`https://localhost:5001/api/Orders/${orderId}/complete`);
+            await axios.patch(`https://localhost:1984/api/Orders/${orderId}/complete`);
             toast.success('Заказ успешно завершен');
             await fetchOrders();
         } catch (err) {
@@ -115,7 +115,7 @@ function OrdersTable() {
 
     const deleteOrder = async (orderId) => {
         try {
-            await axios.delete(`https://localhost:5001/api/Orders/${orderId}`);
+            await axios.delete(`https://localhost:1984/api/Orders/${orderId}`);
             toast.success('Заказ успешно удален');
             await fetchOrders();
         } catch (err) {
@@ -135,7 +135,7 @@ function OrdersTable() {
             if (!confirm) return;
 
             await Promise.all(completedOrders.map(order => 
-                axios.delete(`https://localhost:5001/api/Orders/${order.id}`)
+                axios.delete(`https://localhost:1984/api/Orders/${order.id}`)
             ));
             toast.success(`Удалено ${completedOrders.length} завершенных заказов`);
             await fetchOrders();
@@ -147,7 +147,7 @@ function OrdersTable() {
     const fetchProfitAnalysis = async (orderId) => {
         try {
             setAnalysisLoading(true);
-            const response = await axios.get(`https://localhost:5001/api/Orders/${orderId}/profit`);
+            const response = await axios.get(`https://localhost:1984/api/Orders/${orderId}/profit`);
             setProfitAnalysis(response.data);
             setShowAnalysisModal(true);
         } catch (err) {

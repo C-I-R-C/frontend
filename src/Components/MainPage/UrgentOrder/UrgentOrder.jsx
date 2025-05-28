@@ -21,7 +21,7 @@ const UrgentOrders = () => {
   useEffect(() => {
     const fetchUrgentOrders = async () => {
       try {
-        const response = await axios.get('https://localhost:5001/api/Orders/urgent?count=5');
+        const response = await axios.get('https://localhost:1984/api/Orders/urgent?count=5');
         setOrders(response.data);
       } catch (err) {
         setError(err.message);

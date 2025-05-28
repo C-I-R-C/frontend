@@ -30,7 +30,7 @@ function ItemTable() {
   const fetchItems = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('https://localhost:5001/api/Items');
+      const response = await axios.get('https://localhost:1984/api/Items');
       setItems(response.data);
       setFilteredItems(response.data);
     } catch (err) {
@@ -43,7 +43,7 @@ function ItemTable() {
   const fetchItemFlowers = async (itemId) => {
     try {
       setFlowersLoading(true);
-      const response = await axios.get(`https://localhost:5001/api/ItemFlowers?itemId=${itemId}`);
+      const response = await axios.get(`https://localhost:1984/api/ItemFlowers?itemId=${itemId}`);
       setItemFlowers(response.data);
     } catch (err) {
       toast.error(`Ошибка загрузки содержимого: ${err.message}`);
@@ -78,7 +78,7 @@ function ItemTable() {
 
   const handleDeleteItem = async (itemId) => {
     try {
-      await axios.delete(`https://localhost:5001/api/Items/${itemId}`);
+      await axios.delete(`https://localhost:1984/api/Items/${itemId}`);
       toast.success('Лот успешно удален');
       await fetchItems();
     } catch (err) {
@@ -91,7 +91,7 @@ function ItemTable() {
       if (!selectedItem) return;
 
       await axios.delete(
-        `https://localhost:5001/api/ItemFlowers/${selectedItem.id}/flowers/${flowerId}`
+        `https://localhost:1984/api/ItemFlowers/${selectedItem.id}/flowers/${flowerId}`
       );
 
       toast.success('Цветок удален из лота');
@@ -113,7 +113,7 @@ function ItemTable() {
 
   const handleEditItem = async () => {
     try {
-      await axios.put(`https://localhost:5001/api/Items/${currentItem.id}`, {
+      await axios.put(`https://localhost:1984/api/Items/${currentItem.id}`, {
         id: currentItem.id,
         name: currentItem.name,
         basePrice: parseFloat(currentItem.basePrice)
@@ -138,7 +138,7 @@ function ItemTable() {
   const fetchCostAnalysis = async (itemId) => {
     try {
       setAnalysisLoading(true);
-      const response = await axios.get(`https://localhost:5001/api/Items/${itemId}/cost-analysis`);
+      const response = await axios.get(`https://localhost:1984/api/Items/${itemId}/cost-analysis`);
       setCostAnalysis(response.data);
       setShowAnalysisModal(true);
     } catch (err) {
