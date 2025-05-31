@@ -34,7 +34,7 @@ function AddOrder() {
   const fetchClients = async () => {
     try {
       setLoading(prev => ({...prev, clients: true}));
-      const response = await axios.get('https://localhost:5001/api/Clients');
+      const response = await axios.get('https://localhost:1984/api/Clients');
       setClients(response.data);
     } catch (err) {
       setError(`Ошибка загрузки клиентов: ${err.message}`);
@@ -46,7 +46,7 @@ function AddOrder() {
   const fetchItems = async () => {
     try {
       setLoading(prev => ({...prev, items: true}));
-      const response = await axios.get('https://localhost:5001/api/Items');
+      const response = await axios.get('https://localhost:1984/api/Items');
       setItems(response.data);
     } catch (err) {
       setError(`Ошибка загрузки товаров: ${err.message}`);
@@ -95,7 +95,7 @@ function AddOrder() {
         ? `${orderData.orderCompleteDate}T00:00:00.000Z`
         : new Date().toISOString();
       
-      const response = await axios.post('https://localhost:5001/api/Orders', {
+      const response = await axios.post('https://localhost:1984/api/Orders', {
         clientId: parseInt(orderData.clientId),
         orderCompleteDate: formattedDate,
         comment: orderData.comment,

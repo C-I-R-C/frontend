@@ -33,7 +33,7 @@ export default function FlowersTabs() {
   const fetchFlowers = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('https://localhost:5001/api/Flowers');
+      const response = await axios.get('https://localhost:1984/api/Flowers');
       setFlowers(response.data);
     } catch (err) {
       toast.error('Ошибка загрузки цветков', {
@@ -50,7 +50,7 @@ export default function FlowersTabs() {
 
   const fetchColors = async () => {
     try {
-      const response = await axios.get('https://localhost:5001/api/Colors');
+      const response = await axios.get('https://localhost:1984/api/Colors');
       setColors(response.data);
     } catch (err) {
       toast.error('Ошибка загрузки цветов', {
@@ -62,7 +62,7 @@ export default function FlowersTabs() {
   const fetchIngredients = async (flowerId) => {
     try {
       setIngredientsLoading(true);
-      const response = await axios.get(`https://localhost:5001/api/FlowerIngredients?flowerId=${flowerId}`);
+      const response = await axios.get(`https://localhost:1984/api/FlowerIngredients?flowerId=${flowerId}`);
       setIngredients(response.data);
     } catch (err) {
       toast.error('Ошибка загрузки состава', {
@@ -80,7 +80,7 @@ export default function FlowersTabs() {
 
   const handleAddFlower = async () => {
     try {
-      await axios.post('https://localhost:5001/api/Flowers', newFlower);
+      await axios.post('https://localhost:1984/api/Flowers', newFlower);
       setShowAddModal(false);
       setNewFlower({ name: '', inStock: 0, costPerUnit: 0, colorId: 1 });
       toast.success('Цветок успешно добавлен');
@@ -94,7 +94,7 @@ export default function FlowersTabs() {
 
   const handleUpdateQuantity = async (flowerId) => {
     try {
-      await axios.patch(`https://localhost:5001/api/Flowers/${flowerId}/quantity`, {
+      await axios.patch(`https://localhost:1984/api/Flowers/${flowerId}/quantity`, {
         quantity: parseInt(quantity),
         isIncrement
       });
@@ -110,7 +110,7 @@ export default function FlowersTabs() {
 
   const handleEditFlower = async () => {
     try {
-      await axios.put(`https://localhost:5001/api/Flowers/${currentFlower.id}`, {
+      await axios.put(`https://localhost:1984/api/Flowers/${currentFlower.id}`, {
         name: currentFlower.name,
         inStock: parseInt(currentFlower.inStock),
         costPerUnit: parseFloat(currentFlower.costPerUnit),
@@ -128,7 +128,7 @@ export default function FlowersTabs() {
 
   const handleDelete = async (flowerId) => {
     try {
-      await axios.delete(`https://localhost:5001/api/Flowers/${flowerId}`);
+      await axios.delete(`https://localhost:1984/api/Flowers/${flowerId}`);
       toast.success('Цветок успешно удален');
       await fetchFlowers();
     } catch (err) {
@@ -297,7 +297,7 @@ export default function FlowersTabs() {
                                 onClick={async () => {
                                   try {
                                     await axios.delete(
-                                      `https://localhost:5001/api/FlowerIngredients/${selectedFlower.id}/ingredients/${item.ingredient.id}`
+                                      `https://localhost:1984/api/FlowerIngredients/${selectedFlower.id}/ingredients/${item.ingredient.id}`
                                     );
                                     toast.success('Ингредиент удален из рецепта');
                                     await fetchIngredients(selectedFlower.id);

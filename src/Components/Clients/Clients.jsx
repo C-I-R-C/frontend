@@ -24,7 +24,7 @@ function ClientsTable() {
     const fetchClients = async () => {
         try {
             setLoading(true);
-            const response = await axios.get('https://localhost:5001/api/Clients');
+            const response = await axios.get('https://localhost:1984/api/Clients');
             setClients(response.data);
             setFilteredClients(response.data);
         } catch (err) {
@@ -36,7 +36,7 @@ function ClientsTable() {
 
     const handleAddClient = async () => {
         try {
-            await axios.post('https://localhost:5001/api/Clients', newClient);
+            await axios.post('https://localhost:1984/api/Clients', newClient);
             setShowAddModal(false);
             setNewClient({ name: '', phoneNumber: '', discountLevel: 10 });
             toast.success('Клиент успешно добавлен');
@@ -48,7 +48,7 @@ function ClientsTable() {
 
     const handleEditClient = async () => {
         try {
-            await axios.put(`https://localhost:5001/api/Clients/${currentClient.id}`, currentClient);
+            await axios.put(`https://localhost:1984/api/Clients/${currentClient.id}`, currentClient);
             setShowEditModal(false);
             toast.success('Клиент успешно обновлен');
             await fetchClients();
@@ -59,7 +59,7 @@ function ClientsTable() {
 
     const handleDelete = async (id) => {
         try {
-            await axios.delete(`https://localhost:5001/api/Clients/${id}`);
+            await axios.delete(`https://localhost:1984/api/Clients/${id}`);
             toast.success('Клиент успешно удален');
             await fetchClients();
         } catch (err) {

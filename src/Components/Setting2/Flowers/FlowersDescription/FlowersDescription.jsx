@@ -28,7 +28,7 @@ function FlowerDescription() {
   const fetchFlowers = async () => {
     try {
       setLoading(prev => ({...prev, flowers: true}));
-      const response = await axios.get('https://localhost:5001/api/Flowers');
+      const response = await axios.get('https://localhost:1984/api/Flowers');
       setFlowers(response.data);
     } catch (err) {
       toast.error(`Ошибка загрузки цветов: ${err.message}`);
@@ -40,7 +40,7 @@ function FlowerDescription() {
   const fetchIngredients = async () => {
     try {
       setLoading(prev => ({...prev, ingredients: true}));
-      const response = await axios.get('https://localhost:5001/api/Ingredients');
+      const response = await axios.get('https://localhost:1984/api/Ingredients');
       setIngredients(response.data);
     } catch (err) {
       toast.error(`Ошибка загрузки ингредиентов: ${err.message}`);
@@ -84,7 +84,7 @@ function FlowerDescription() {
       // Отправляем все ингредиенты для выбранного цветка
       const requests = recipeItems.map(item => 
         axios.post(
-          `https://localhost:5001/api/FlowerIngredients?flowerId=${selectedFlower}`,
+          `https://localhost:1984/api/FlowerIngredients?flowerId=${selectedFlower}`,
           {
             ingredientId: parseInt(item.ingredientId),
             quantityRequired: parseFloat(item.quantityRequired)

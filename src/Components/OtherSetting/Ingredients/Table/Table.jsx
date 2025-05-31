@@ -98,7 +98,7 @@ const IngredientAddModal = ({ onClose, onSuccess }) => {
         costPerUnit: Number(ingredient.costPerUnit)
       };
 
-      await axios.post('http://localhost:5000/api/Ingredients', payload, {
+      await axios.post('https://localhost:1984/api/Ingredients', payload, {
         headers: {
           'Content-Type': 'application/json'
         }
@@ -193,7 +193,7 @@ function IngredientsTable() {
 
   const fetchIngredients = async () => {
     try {
-      const response = await axios.get('https://localhost:5001/api/Ingredients');
+      const response = await axios.get('https://localhost:1984/api/Ingredients');
       setIngredients(response.data);
       setFilteredIngredients(response.data);
     } catch (err) {
@@ -209,7 +209,7 @@ function IngredientsTable() {
 
   const handleUpdateStock = async (id) => {
     try {
-      await axios.patch(`https://localhost:5001/api/Ingredients/${id}/stock`, {
+      await axios.patch(`https://localhost:1984/api/Ingredients/${id}/stock`, {
         quantity: parseInt(quantity),
         isIncrement
       });
@@ -222,7 +222,7 @@ function IngredientsTable() {
 
   const handleEditIngredient = async () => {
     try {
-      await axios.put(`https://localhost:5001/api/Ingredients/${currentIngredient.id}`, {
+      await axios.put(`https://localhost:1984/api/Ingredients/${currentIngredient.id}`, {
         id: currentIngredient.id,
         name: currentIngredient.name,
         inStock: currentIngredient.inStock,
@@ -237,7 +237,7 @@ function IngredientsTable() {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`https://localhost:5001/api/Ingredients/${id}`);
+      await axios.delete(`https://localhost:1984/api/Ingredients/${id}`);
       await fetchIngredients();
     } catch (err) {
       setError(err.message);

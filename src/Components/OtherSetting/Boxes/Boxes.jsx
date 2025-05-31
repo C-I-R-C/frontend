@@ -26,7 +26,7 @@ function BoxesTable() {
 
   const fetchBoxes = async () => {
     try {
-      const response = await axios.get('https://localhost:5001/api/Boxes');
+      const response = await axios.get('https://localhost:1984/api/Boxes');
       setBoxes(response.data);
       setFilteredBoxes(response.data);
     } catch (err) {
@@ -38,7 +38,7 @@ function BoxesTable() {
 
   const handleAddBox = async () => {
     try {
-      await axios.post('https://localhost:5001/api/Boxes', {
+      await axios.post('https://localhost:1984/api/Boxes', {
         name: newBox.name,
         inStock: parseInt(newBox.inStock),
         costPerUnit: parseFloat(newBox.costPerUnit)
@@ -53,7 +53,7 @@ function BoxesTable() {
 
   const handleUpdateStock = async (id) => {
     try {
-      await axios.patch(`https://localhost:5001/api/Boxes/${id}/stock`, {
+      await axios.patch(`https://localhost:1984/api/Boxes/${id}/stock`, {
         quantity: parseInt(quantity),
         isIncrement
       });
@@ -66,7 +66,7 @@ function BoxesTable() {
 
   const handleEditBox = async () => {
     try {
-      await axios.put(`https://localhost:5001/api/Boxes/${currentBox.id}`, {
+      await axios.put(`https://localhost:1984/api/Boxes/${currentBox.id}`, {
         id: currentBox.id,
         name: currentBox.name,
         inStock: parseInt(currentBox.inStock),
@@ -81,7 +81,7 @@ function BoxesTable() {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`https://localhost:5001/api/Boxes/${id}`);
+      await axios.delete(`https://localhost:1984/api/Boxes/${id}`);
       await fetchBoxes();
     } catch (err) {
       setError(err.message);

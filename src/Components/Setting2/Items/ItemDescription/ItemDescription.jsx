@@ -28,7 +28,7 @@ function ItemDescription() {
   const fetchItems = async () => {
     try {
       setLoading(prev => ({...prev, items: true}));
-      const response = await axios.get('https://localhost:5001/api/Items');
+      const response = await axios.get('https://localhost:1984/api/Items');
       setItems(response.data);
     } catch (err) {
       toast.error(`Ошибка загрузки лотов: ${err.message}`);
@@ -40,7 +40,7 @@ function ItemDescription() {
   const fetchFlowers = async () => {
     try {
       setLoading(prev => ({...prev, flowers: true}));
-      const response = await axios.get('https://localhost:5001/api/Flowers');
+      const response = await axios.get('https://localhost:1984/api/Flowers');
       setFlowers(response.data);
     } catch (err) {
       toast.error(`Ошибка загрузки цветов: ${err.message}`);
@@ -86,7 +86,7 @@ function ItemDescription() {
         .filter(selection => selection.flowerId)
         .map(selection => 
           axios.post(
-            `https://localhost:5001/api/ItemFlowers?itemId=${selectedItem}`,
+            `https://localhost:1984/api/ItemFlowers?itemId=${selectedItem}`,
             {
               flowerId: parseInt(selection.flowerId),
               quantity: parseInt(selection.quantity)
