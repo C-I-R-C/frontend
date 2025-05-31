@@ -132,7 +132,7 @@ function ColorsTable() {
       <table className={styles.table}>
         <thead>
           <tr>
-            <th className={styles.header}>ID</th>
+            {/* <th className={styles.header}>ID</th> */}
             <th className={styles.header}>Название</th>
             <th className={styles.header}>Натурально</th>
             <th className={styles.header}>Действия</th>
@@ -142,7 +142,7 @@ function ColorsTable() {
           {filteredColors.length > 0 ? (
             filteredColors.map((color) => (
               <tr key={color.id} className={styles.row}>
-                <td className={styles.cell}>{color.id}</td>
+                {/* <td className={styles.cell}>{color.id}</td> */}
                 <td className={styles.cell}>{color.name}</td>
                 <td className={styles.cell}>{color.isNatural ? 'Да' : 'Нет'}</td>
                 <td className={styles.cell}>

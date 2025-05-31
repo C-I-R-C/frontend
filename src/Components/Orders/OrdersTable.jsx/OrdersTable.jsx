@@ -12,6 +12,7 @@ function OrdersTable() {
     const [showDetailsModal, setShowDetailsModal] = useState(false);
     const [showEditModal, setShowEditModal] = useState(false);
     const [showAnalysisModal, setShowAnalysisModal] = useState(false);
+    const [showComponentsModal, setShowComponentsModal] = useState(false);
     const [currentOrder, setCurrentOrder] = useState(null);
     const [orderData, setOrderData] = useState({
         comment: '',
@@ -19,7 +20,9 @@ function OrdersTable() {
         orderCompleteDate: ''
     });
     const [profitAnalysis, setProfitAnalysis] = useState(null);
+    const [componentsValidation, setComponentsValidation] = useState(null);
     const [analysisLoading, setAnalysisLoading] = useState(false);
+    const [componentsLoading, setComponentsLoading] = useState(false);
 
     useEffect(() => {
         fetchOrders();
@@ -157,6 +160,19 @@ function OrdersTable() {
         }
     };
 
+    const fetchComponentsValidation = async (orderId) => {
+        try {
+            setComponentsLoading(true);
+            const response = await axios.get(`https://localhost:1984/api/Orders/validate-order/${orderId}`);
+            setComponentsValidation(response.data);
+            setShowComponentsModal(true);
+        } catch (err) {
+            toast.error(`Ошибка загрузки составляющих: ${err.message}`);
+        } finally {
+            setComponentsLoading(false);
+        }
+    };
+
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
         setOrderData(prev => ({
@@ -226,7 +242,7 @@ function OrdersTable() {
             <table className={styles.table}>
                 <thead>
                     <tr>
-                        <th className={styles.header}>ID</th>
+                        {/* <th className={styles.header}>ID</th> */}
                         <th className={styles.header}>Клиент</th>
                         <th className={styles.header}>Дата заказа</th>
                         <th className={styles.header}>Дата завершения</th>
@@ -239,8 +255,8 @@ function OrdersTable() {
                     {filteredOrders.length > 0 ? (
                         filteredOrders.map((order) => (
                             <tr key={order.id} className={styles.row}>
-                                <td className={styles.cell}>{order.id}</td>
-                                <td className={styles.cell}>{order.client.name} (ID: {order.client.id})</td>
+                                {/* <td className={styles.cell}>{order.id}</td> */}
+                                <td className={styles.cell}>{order.client.name} </td>
                                 <td className={styles.cell}>{formatDate(order.orderDate)}</td>
                                 <td className={styles.cell}>{formatDate(order.orderCompleteDate)}</td>
                                 <td className={styles.cell}>{order.totalPrice}</td>
@@ -274,6 +290,16 @@ function OrdersTable() {
                                             disabled={analysisLoading && currentOrder?.id === order.id}
                                         >
                                             {analysisLoading && currentOrder?.id === order.id ? 'Загрузка...' : 'Анализ'}
+                                        </button>
+                                        <button
+                                            onClick={() => {
+                                                setCurrentOrder(order);
+                                                fetchComponentsValidation(order.id);
+                                            }}
+                                            className={styles.componentsButton}
+                                            disabled={componentsLoading && currentOrder?.id === order.id}
+                                        >
+                                            {componentsLoading && currentOrder?.id === order.id ? 'Загрузка...' : 'Составляющие'}
                                         </button>
                                         <button
                                             onClick={() => completeOrder(order.id)}
@@ -463,6 +489,112 @@ function OrdersTable() {
                             </div>
                         ) : (
                             <div className={styles.noResults}>Данные анализа не загружены</div>
+                        )}
+                    </div>
+                </div>
+            )}
+
+            {/* Модальное окно составляющих заказа */}
+            {showComponentsModal && currentOrder && (
+                <div className={styles.modalOverlay}>
+                    <div className={styles.modal}>
+                        <h3>Составляющие заказа #{currentOrder.id}</h3>
+                        <button 
+                            onClick={() => {
+                                setShowComponentsModal(false);
+                                setCurrentOrder(null);
+                                setComponentsValidation(null);
+                            }}
+                            className={styles.closeButton}
+                        >
+                            ×
+                        </button>
+                        
+                        {componentsLoading ? (
+                            <div className={styles.loading}>Загрузка данных...</div>
+                        ) : componentsValidation ? (
+                            <div className={styles.componentsContainer}>
+                                <div className={styles.validationStatus}>
+                                    <strong>Готов к сборке:</strong> 
+                                    <span className={componentsValidation.isValid ? styles.validStatus : styles.invalidStatus}>
+                                        {componentsValidation.isValid ? 'Да' : 'Нет'}
+                                    </span>
+                                </div>
+
+                                <h4>Цветы:</h4>
+                                <table className={styles.miniTable}>
+                                    <thead>
+                                        <tr>
+                                            <th>Название</th>
+                                            <th>Необходимое кол-во</th>
+                                            <th>Доступное кол-во</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {componentsValidation.flowerStatuses.map((flower, index) => (
+                                            <tr key={index}>
+                                                <td>{flower.materialName}</td>
+                                                <td>{flower.requiredQuantity}</td>
+                                                <td>{flower.availableQuantity}</td>
+                                                <td className={flower.isAvailable ? styles.available : styles.unavailable}>
+                                                    {flower.isAvailable ? 'в наличии' : 'недостаточно'}
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+
+                                <h4>Ингредиенты:</h4>
+                                <table className={styles.miniTable}>
+                                    <thead>
+                                        <tr>
+                                            <th>Название</th>
+                                            <th>Необходимое кол-во</th>
+                                            <th>Доступное кол-во</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {componentsValidation.ingredientStatuses.map((ingredient, index) => (
+                                            <tr key={index}>
+                                                <td>{ingredient.materialName}</td>
+                                                <td>{ingredient.requiredQuantity}</td>
+                                                <td>{ingredient.availableQuantity}</td>
+                                                <td className={ingredient.isAvailable ? styles.available : styles.unavailable}>
+                                                    {ingredient.isAvailable ? 'в наличии' : 'недостаточно'}
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+
+                                <h4>Коробки:</h4>
+                                <table className={styles.miniTable}>
+                                    <thead>
+                                        <tr>
+                                            <th>Название</th>
+                                            <th>Необходимое кол-во</th>
+                                            <th>Доступное кол-во</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {componentsValidation.boxStatuses.map((box, index) => (
+                                            <tr key={index}>
+                                                <td>{box.materialName}</td>
+                                                <td>{box.requiredQuantity}</td>
+                                                <td>{box.availableQuantity}</td>
+                                                <td className={box.isAvailable ? styles.available : styles.unavailable}>
+                                                    {box.isAvailable ? 'в наличии' : 'недостаточно'}
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                        ) : (
+                            <div className={styles.noResults}>Данные о составляющих не загружены</div>
                         )}
                     </div>
                 </div>

@@ -98,7 +98,7 @@ const IngredientAddModal = ({ onClose, onSuccess }) => {
         costPerUnit: Number(ingredient.costPerUnit)
       };
 
-      await axios.post('https://localhost:1984/api/Ingredients', payload, {
+      await axios.post('http://localhost:1984/api/Ingredients', payload, {
         headers: {
           'Content-Type': 'application/json'
         }
@@ -307,7 +307,7 @@ function IngredientsTable() {
       <table className={styles.table}>
         <thead>
           <tr>
-            <th className={styles.header}>ID</th>
+            {/* <th className={styles.header}>ID</th> */}
             <th className={styles.header}>Название</th>
             <th className={styles.header}>Наличие</th>
             <th className={styles.header}>Цена за единицу</th>
@@ -319,7 +319,7 @@ function IngredientsTable() {
           {filteredIngredients.length > 0 ? (
             filteredIngredients.map((ingredient) => (
               <tr key={ingredient.id} className={styles.row}>
-                <td className={styles.cell}>{ingredient.id}</td>
+                {/* <td className={styles.cell}>{ingredient.id}</td> */}
                 <td className={styles.cell}>{ingredient.name}</td>
                 <td className={styles.cell}>{ingredient.inStock}</td>
                 <td className={styles.cell}>{ingredient.costPerUnit}</td>

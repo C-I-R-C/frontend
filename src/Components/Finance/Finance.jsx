@@ -17,6 +17,7 @@ export default function ProfitChart() {
   const [chartData, setChartData] = useState([])
   const [totalRevenue, setTotalRevenue] = useState(0)
   const [totalCost, setTotalCost] = useState(0)
+  const [result, setResult] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,7 +33,6 @@ export default function ProfitChart() {
           )
         )
 
-   
         const monthlyData = {}
 
         orders.forEach((order, index) => {
@@ -61,13 +61,14 @@ export default function ProfitChart() {
           cost: monthlyData[month].cost
         }))
 
-        // Считаем общие суммы
         const totalRev = formattedData.reduce((sum, item) => sum + item.revenue, 0)
         const totalCst = formattedData.reduce((sum, item) => sum + item.cost, 0)
+        const result = totalRev - totalCost;
 
         setChartData(formattedData)
         setTotalRevenue(totalRev)
         setTotalCost(totalCst)
+        setResult(result)
         setLoading(false)
 
       } catch (error) {
@@ -109,13 +110,16 @@ export default function ProfitChart() {
               formatter={(value) => [`${value.toFixed(2)}`, value === 'revenue' ? 'Выручка' : 'Затраты']}
               labelFormatter={(label) => `Месяц: ${label}`}
             />
+
             <Legend />
+            
             <Bar 
               dataKey="revenue" 
-              name="Выручка (грязная прибыль)" 
+              name="Выручка" 
               fill="#4ade80" 
               radius={[4, 4, 0, 0]} 
             />
+
             <Bar 
               dataKey="cost" 
               name="Затраты" 

@@ -35,17 +35,9 @@ const UrgentOrders = () => {
 
   const formatTimeUntilDue = (timeString) => {
     if (!timeString) return '-';
-
-    // Split the time string by '.' to separate days from the rest
     const [daysPart, timePart] = timeString.split('.');
-
-    // Extract days from the days part
     const days = parseInt(daysPart);
-
-    // Split the time part by ':' to extract hours and minutes
     const [hours, minutes] = timePart.split(':');
-
-    // Construct the formatted string
     return `${days} дней ${hours} часов ${minutes} минут`;
   };
 
@@ -81,7 +73,7 @@ const UrgentOrders = () => {
         <Table>
           <TableHead sx={{ backgroundColor: '#f5f5f5' }}>
             <TableRow>
-              <TableCell sx={{ fontWeight: 'bold' }}>ID</TableCell>
+              {/* <TableCell sx={{ fontWeight: 'bold' }}>ID</TableCell> */}
               <TableCell sx={{ fontWeight: 'bold' }}>Клиент</TableCell>
               <TableCell sx={{ fontWeight: 'bold' }}>Времени до выдачи</TableCell>
               <TableCell sx={{ fontWeight: 'bold' }}>Дата выдачи</TableCell>
@@ -92,7 +84,7 @@ const UrgentOrders = () => {
           <TableBody>
             {orders.map((order) => (
               <TableRow key={order.orderId}>
-                <TableCell>{order.orderId}</TableCell>
+                {/* <TableCell>{order.orderId}</TableCell> */}
                 <TableCell>{order.clientName}</TableCell>
                 <TableCell>{formatTimeUntilDue(order.timeUntilDue || '')}</TableCell>
                 <TableCell>{formatDate(order.completionDate)}</TableCell>

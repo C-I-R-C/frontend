@@ -137,7 +137,7 @@ function ClientsTable() {
             <table className={styles.table}>
                 <thead>
                     <tr>
-                        <th className={styles.header}>ID</th>
+                        {/* <th className={styles.header}>ID</th> */}
                         <th className={styles.header}>Имя</th>
                         <th className={styles.header}>Телефон</th>
                         <th className={styles.header}>Всего заказов</th>
@@ -151,7 +151,7 @@ function ClientsTable() {
                     {filteredClients.length > 0 ? (
                         filteredClients.map((client) => (
                             <tr key={client.id} className={styles.row}>
-                                <td className={styles.cell}>{client.id}</td>
+                                {/* <td className={styles.cell}>{client.id}</td> */}
                                 <td className={styles.cell}>{client.name}</td>
                                 <td className={styles.cell}>{client.phoneNumber}</td>
                                 <td className={styles.cell}>{client.totalOrdersCount}</td>

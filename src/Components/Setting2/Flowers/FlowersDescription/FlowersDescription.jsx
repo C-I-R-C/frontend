@@ -12,7 +12,7 @@ function FlowerDescription() {
     ingredients: false,
     submitting: false
   });
-  
+
   const [selectedFlower, setSelectedFlower] = useState(null);
   const [recipeItems, setRecipeItems] = useState([
     { ingredientId: '', quantityRequired: 0 }
@@ -27,25 +27,25 @@ function FlowerDescription() {
 
   const fetchFlowers = async () => {
     try {
-      setLoading(prev => ({...prev, flowers: true}));
+      setLoading(prev => ({ ...prev, flowers: true }));
       const response = await axios.get('https://localhost:1984/api/Flowers');
       setFlowers(response.data);
     } catch (err) {
       toast.error(`Ошибка загрузки цветов: ${err.message}`);
     } finally {
-      setLoading(prev => ({...prev, flowers: false}));
+      setLoading(prev => ({ ...prev, flowers: false }));
     }
   };
 
   const fetchIngredients = async () => {
     try {
-      setLoading(prev => ({...prev, ingredients: true}));
+      setLoading(prev => ({ ...prev, ingredients: true }));
       const response = await axios.get('https://localhost:1984/api/Ingredients');
       setIngredients(response.data);
     } catch (err) {
       toast.error(`Ошибка загрузки ингредиентов: ${err.message}`);
     } finally {
-      setLoading(prev => ({...prev, ingredients: false}));
+      setLoading(prev => ({ ...prev, ingredients: false }));
     }
   };
 
@@ -78,11 +78,38 @@ function FlowerDescription() {
       return;
     }
 
+    // try {
+    //   setLoading(prev => ({...prev, submitting: true}));
+
+    //   // Отправляем все ингредиенты для выбранного цветка
+    //   const requests = recipeItems.map(item => 
+    //     axios.post(
+    //       `https://localhost:5001/api/FlowerIngredients?flowerId=${selectedFlower}`,
+    //       {
+    //         ingredientId: parseInt(item.ingredientId),
+    //         quantityRequired: parseFloat(item.quantityRequired)
+    //       }
+    //     )
+    //   );
+
+    //   await Promise.all(requests);
+
+    //   toast.success('Рецепт успешно сохранен');
+    //   setShowModal(false);
+    //   setSelectedFlower(null);
+    //   setRecipeItems([{ ingredientId: '', quantityRequired: 0 }]);
+
+    // } catch (err) {
+    //   toast.error(err.response?.data?.message || err.message);
+    // } finally {
+    //   setLoading(prev => ({...prev, submitting: false}));
+    // }
+
     try {
-      setLoading(prev => ({...prev, submitting: true}));
-      
+      setLoading(prev => ({ ...prev, submitting: true }));
+
       // Отправляем все ингредиенты для выбранного цветка
-      const requests = recipeItems.map(item => 
+      const requests = recipeItems.map(item =>
         axios.post(
           `https://localhost:1984/api/FlowerIngredients?flowerId=${selectedFlower}`,
           {
@@ -92,23 +119,26 @@ function FlowerDescription() {
         )
       );
 
+      // Добавляем задержку 3000 мс перед выполнением запросов
+      await new Promise(resolve => setTimeout(resolve, 3000));
       await Promise.all(requests);
-      
+
       toast.success('Рецепт успешно сохранен');
       setShowModal(false);
       setSelectedFlower(null);
       setRecipeItems([{ ingredientId: '', quantityRequired: 0 }]);
-      
+
     } catch (err) {
       toast.error(err.response?.data?.message || err.message);
     } finally {
-      setLoading(prev => ({...prev, submitting: false}));
+      setLoading(prev => ({ ...prev, submitting: false }));
     }
+
   };
 
   return (
     <div className={styles.container}>
-      <button 
+      <button
         onClick={() => setShowModal(true)}
         className={styles.addButton}
       >
@@ -119,7 +149,7 @@ function FlowerDescription() {
         <div className={styles.modalOverlay}>
           <div className={styles.modal}>
             <h2>Описание рецепта цветка</h2>
-            
+
             <form onSubmit={handleSubmit}>
               <div className={styles.formGroup}>
                 <label>Цветок:</label>
@@ -201,15 +231,15 @@ function FlowerDescription() {
               </div>
 
               <div className={styles.buttonGroup}>
-                <button 
-                  type="submit" 
+                <button
+                  type="submit"
                   className={styles.submitButton}
                   disabled={loading.submitting}
                 >
                   {loading.submitting ? 'Отправка...' : 'Сохранить рецепт'}
                 </button>
-                <button 
-                  type="button" 
+                <button
+                  type="button"
                   onClick={() => {
                     setShowModal(false);
                     setSelectedFlower(null);

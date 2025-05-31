@@ -59,7 +59,7 @@ const LowStockIngredients = () => {
         <Table>
           <TableHead sx={{ backgroundColor: '#f5f5f5' }}>
             <TableRow>
-              <TableCell sx={{ fontWeight: 'bold' }}>ID</TableCell>
+              {/* <TableCell sx={{ fontWeight: 'bold' }}>ID</TableCell> */}
               <TableCell sx={{ fontWeight: 'bold' }}>Название</TableCell>
               <TableCell sx={{ fontWeight: 'bold' }}>Количество</TableCell>
             </TableRow>
@@ -67,7 +67,7 @@ const LowStockIngredients = () => {
           <TableBody>
             {ingredients.map((ingredient) => (
               <TableRow key={ingredient.id}>
-                <TableCell>{ingredient.id}</TableCell>
+                {/* <TableCell>{ingredient.id}</TableCell> */}
                 <TableCell>{ingredient.name}</TableCell>
                 <TableCell sx={{ color: ingredient.inStock < 10 ? 'red' : 'inherit' }}>
                   {ingredient.inStock}

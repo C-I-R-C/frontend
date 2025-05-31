@@ -156,7 +156,7 @@ function BoxesTable() {
       <table className={styles.table}>
         <thead>
           <tr>
-            <th className={styles.header}>ID</th>
+            {/* <th className={styles.header}>ID</th> */}
             <th className={styles.header}>Название</th>
             <th className={styles.header}>В наличии</th>
             <th className={styles.header}>Цена за единицу</th>
@@ -168,7 +168,7 @@ function BoxesTable() {
           {filteredBoxes.length > 0 ? (
             filteredBoxes.map((box) => (
               <tr key={box.id} className={styles.row}>
-                <td className={styles.cell}>{box.id}</td>
+                {/* <td className={styles.cell}>{box.id}</td> */}
                 <td className={styles.cell}>{box.name}</td>
                 <td className={styles.cell}>{box.inStock}</td>
                 <td className={styles.cell}>{box.costPerUnit}</td>

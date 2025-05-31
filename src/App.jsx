@@ -17,7 +17,6 @@ import Items from './Components/Setting2/Items/Items';
 import StartPage from './Components/StartPage/StartPage';
 import MainPage from './Components/MainPage/MainPage';
 import  ProfitChart  from './Components/Finance/Finance';
-import ProfitChart2 from './Components/Finance/Finance2';
 
 const router = createBrowserRouter([
   {

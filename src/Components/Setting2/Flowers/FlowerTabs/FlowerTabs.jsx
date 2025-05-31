@@ -166,7 +166,7 @@ export default function FlowersTabs() {
       <table className={styles.table}>
         <thead>
           <tr>
-            <th className={styles.header}>ID</th>
+            {/* <th className={styles.header}>ID</th> */}
             <th className={styles.header}>Название</th>
             <th className={styles.header}>В наличии</th>
             <th className={styles.header}>Цена</th>
@@ -178,7 +178,7 @@ export default function FlowersTabs() {
         <tbody>
           {flowers.map(flower => (
             <tr key={flower.id} className={styles.row}>
-              <td className={styles.cell}>{flower.id}</td>
+              {/* <td className={styles.cell}>{flower.id}</td> */}
               <td className={styles.cell}>{flower.name}</td>
               <td className={styles.cell}>{flower.inStock}</td>
               <td className={styles.cell}>{flower.costPerUnit}</td>

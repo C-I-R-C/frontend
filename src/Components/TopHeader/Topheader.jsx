@@ -48,7 +48,7 @@ const Header = () => {
                     <button
                         className={styles.navButton}
                     >
-                        Другие настройки
+                        Кухня 
                     </button>
                 </a>
 

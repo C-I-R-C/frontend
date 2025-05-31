@@ -26,10 +26,9 @@ export default function Login() {
         setError('');
 
         try {
-            const response = await axios.post('https://localhost:1984/api/Auth/login', formData);
+            const response = await axios.post('http://localhost:1984/api/Auth/login', formData);
             console.log('Успешный вход:', response.data);
 
-            // Здесь можно сохранить токен авторизации и перенаправить на защищенную страницу
             navigate('/mainpage');
         } catch (err) {
             setError(err.response?.data?.message || 'Ошибка входа');

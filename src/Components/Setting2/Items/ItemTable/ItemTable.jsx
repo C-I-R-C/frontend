@@ -172,7 +172,7 @@ function ItemTable() {
       <table className={styles.table}>
         <thead>
           <tr>
-            <th className={styles.header}>ID</th>
+            {/* <th className={styles.header}>ID</th> */}
             <th className={styles.header}>Название</th>
             <th className={styles.header}>Цена</th>
             <th className={styles.header}>Коробка</th>
@@ -183,7 +183,7 @@ function ItemTable() {
           {filteredItems.length > 0 ? (
             filteredItems.map(item => (
               <tr key={item.id} className={styles.row}>
-                <td className={styles.cell}>{item.id}</td>
+                {/* <td className={styles.cell}>{item.id}</td> */}
                 <td className={styles.cell}>{item.name}</td>
                 <td className={styles.cell}>{item.basePrice}</td>
                 <td className={styles.cell}>{item.box.name}</td>
